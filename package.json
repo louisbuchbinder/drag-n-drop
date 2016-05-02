@@ -1,0 +1,28 @@
+{
+  "name": "drag-n-drop",
+  "version": "1.0.0",
+  "description": "Drag files into client browser. Create a copy on the server.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node index.js",
+    "start-dev": "npm run build && (sleep 2 && npm test) & nodemon index.js",
+    "test": "mocha spec/**/*.js",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npm run concat && npm run copy",
+    "copy": "cp client/* dist/",
+    "concat": "cat node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js > dist/vendors.js"
+  },
+  "author": "Louis Buchbinder",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "jquery": "^2.2.3",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "jshint": "^2.9.2",
+    "mocha": "^2.4.5"
+  }
+}
