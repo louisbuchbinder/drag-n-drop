@@ -54,7 +54,7 @@ pg_ctl stop --pgdata=database/test
 3. Allow for dropped directories
 4. Pipe files as downloadable
 5. BootstrapCSS
-7. directly pipe files from db
+
 
 
 

@@ -1,6 +1,7 @@
 'use strict';
 
-const fs = require('fs');
+
+
 const db = require('./db/database.js')();
 const shortenedUrls = require('./shortenedUrls');
 const setExistingUrls = shortenedUrls.setExistingUrls;
@@ -11,20 +12,33 @@ var username = 'louie';
 var userindex = '1';
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
 
+
+///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
+const stream = require('stream');
+var ReadableBuffer = function (buffer) {
+  stream.Readable.call(this);
+  this.buffer = buffer;
+};
+ReadableBuffer.prototype = stream.Readable.prototype;
+ReadableBuffer.prototype._read = function () {
+  this.push(this.buffer);
+  this.buffer = null;
+};
+///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
+
+
+
 module.exports = (app) => {
   
   const setFileEndpoint = (filename, link) => {
     app.get(link, (request, response) => {
       db.fetch('files', 'filedata', {filename:filename})
       .then((results) => {
-        var buffer = new Buffer(results.rows[0].filedata, 'hex');
-        var wstream = fs.createWriteStream('uploads/' + filename);
-        wstream.write(buffer); 
-        wstream.end();
-
-        var readStream = fs.createReadStream('uploads/' + filename);
-        readStream.pipe(response);
-      });
+        let buffer = new Buffer(results.rows[0].filedata, 'hex');
+        let readableBuffer = new ReadableBuffer(buffer);
+        readableBuffer.pipe(response);
+      })
+      .catch((error) => console.log('Error fetching the file: ' + filename, error));
     });
   };
   
