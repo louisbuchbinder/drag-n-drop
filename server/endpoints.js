@@ -25,21 +25,29 @@ ReadableBuffer.prototype._read = function () {
   this.buffer = null;
 };
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
+const mime = require('mime');
 
+const setResponseHeadersForFile = (response, filename) => {
+  response.setHeader('Content-disposition', 'attachment; filename=' + filename);
+  response.setHeader('Content-type', mime.lookup(filename));
+};
 
+const pipeFile = (response, filename) => {
+  setResponseHeadersForFile(response, filename);
+  db.fetch('files', 'filedata', {filename:filename})
+  .then((results) => {
+    let buffer = new Buffer(results.rows[0].filedata, 'hex');
+    let readableBuffer = new ReadableBuffer(buffer);
+    readableBuffer.pipe(response);
+  })
+  .catch((error) => console.log('Error fetching the file: ' + filename, error));
+}; 
+///// /////  ///// /////  ///// /////  ///// /////  ///// /////
 
 module.exports = (app) => {
   
   const setFileEndpoint = (filename, link) => {
-    app.get(link, (request, response) => {
-      db.fetch('files', 'filedata', {filename:filename})
-      .then((results) => {
-        let buffer = new Buffer(results.rows[0].filedata, 'hex');
-        let readableBuffer = new ReadableBuffer(buffer);
-        readableBuffer.pipe(response);
-      })
-      .catch((error) => console.log('Error fetching the file: ' + filename, error));
-    });
+    app.get(link, (request, response) => pipeFile(response, filename) );
   };
   
   app.post('/save', (request, response) => {
