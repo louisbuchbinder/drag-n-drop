@@ -1,42 +1,26 @@
 
 "use strict";
 
-var pg = require('pg');
-
-var conString = "postgres://postgres:password@localhost/";
- 
+const pg = require('pg');
+var conString;
 
 var clean = [
-  // 'DROP TABLE IF EXISTS users_quizes_join CASCADE',
-  // 'DROP TABLE IF EXISTS links CASCADE',
-  // 'DROP TABLE IF EXISTS answers CASCADE',
-  // 'DROP TABLE IF EXISTS questions CASCADE',
-  // 'DROP TABLE IF EXISTS quizes CASCADE',
-  // 'DROP TABLE IF EXISTS users_links_join CASCADE',
   'DROP TABLE IF EXISTS files CASCADE',
   'DROP TABLE IF EXISTS users CASCADE'
-
-
 ];
 
 var create = [
-  // 'CREATE TABLE IF NOT EXISTS links (PRIMARY KEY(url), title TEXT, url TEXT UNIQUE, created TEXT)',
   'CREATE TABLE IF NOT EXISTS users (index SERIAL PRIMARY KEY, username TEXT UNIQUE, password TEXT, created TEXT)',
-  'CREATE TABLE IF NOT EXISTS files (index SERIAL PRIMARY KEY, userindex INT, FOREIGN KEY (userindex) REFERENCES users(index), link TEXT UNIQUE, filename TEXT, filedata TEXT)',
-  // 'CREATE TABLE IF NOT EXISTS quizes (PRIMARY KEY(title), username TEXT, title TEXT, created TEXT)',
-  // 'CREATE TABLE IF NOT EXISTS answers (PRIMARY KEY(username, title), username TEXT, title TEXT, answers TEXT, created TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizes(title))',
-  // 'CREATE TABLE IF NOT EXISTS questions (title TEXT, index INTEGER, question TEXT, choices TEXT, answer TEXT, FOREIGN KEY(title) REFERENCES quizes(title))',
-  // 'CREATE TABLE IF NOT EXISTS users_links_join (PRIMARY KEY(username, url), username TEXT, url TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(url) REFERENCES links(url))',
-  // 'CREATE TABLE IF NOT EXISTS users_quizes_join (PRIMARY KEY(username, title), username TEXT, title TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizes(title))'
+  'CREATE TABLE IF NOT EXISTS files (index SERIAL PRIMARY KEY, userindex INT, FOREIGN KEY (userindex) REFERENCES users(index), link TEXT UNIQUE, filename TEXT, filedata TEXT)'
 ];
 
 
 const escape$ = (string) => string.split('').filter((character)=>character!=='$').join('');
 
 
-function makeQueries (queries, client, done, callback) {
-  client.query(queries.shift(), function (error, result) {
-    if (error) { return console.log('error in query: ', error); }
+const makeQueries = (queries, client, done, callback) => {
+  client.query(queries.shift(), (error, result) => {
+    if (error) { return console.error('error in query: ', error); }
     if (queries.length > 0) { return makeQueries(queries, client, done, callback); }
     done();
     callback();
@@ -44,9 +28,9 @@ function makeQueries (queries, client, done, callback) {
 }
 
 
-function initialize (drop, callback) {
-  callback = typeof callback === 'function' ? callback : function () {};
-  pg.connect(conString, function(err, client, done) {
+const initialize = (drop, callback) => {
+  callback = typeof callback === 'function' ? callback : () => {};
+  pg.connect(conString, (err, client, done) => {
     if(err) {
       return console.error('error fetching client from pool', err);
     }
@@ -62,21 +46,17 @@ function initialize (drop, callback) {
 
 
 const submitEscapedQuery = (statement, values) => {
-  return new Promise(function (resolve, reject) {
-    pg.connect(conString, function(error, client, done) {
+  return new Promise( (resolve, reject) => {
+    pg.connect(conString, (error, client, done) => {
       if(error) { return reject('error: ' + error); }
-      client.query(statement, function (error, results) {
+      client.query(statement, (error, results) => {
         if (error) { return reject('error: ' + error); }
         done();
         resolve(results);
       });
     });
   });
-}
-
-
-
-
+};
 
 const insertInto = (table, data) => {
   // table should be a string,
@@ -85,7 +65,7 @@ const insertInto = (table, data) => {
   const columns = Object.keys(data);
   const columnKeys = columns.join(',');
   const values =  columns
-                .map(function (column) { return data[column]; })
+                .map( (column) => data[column] )
                 .map( (value) => '$$' + escape$(value) + '$$')
                 .join(',');
 
@@ -101,9 +81,11 @@ const fetch = (table, columns, where) => {
   // columns should be a string of the column names
   // where should be an object of key value pairs
 
-  where = !where ? where : Object.keys(where)
-          .map((column)=>column + '=' + '$$' + escape$(where[column]) + '$$')
-          .join(' and ');
+  if (typeof where === 'object') {
+    where = Object.keys(where)
+            .map((column)=>column + '=' + '$$' + escape$(where[column]) + '$$')
+            .join(' and ');
+  }
 
   const statement = 'SELECT ' + ( columns ? columns : '*' ) + ' FROM ' + table + ' WHERE ' + ( where ? where : '1=1');
 
@@ -139,6 +121,7 @@ const join = (table1, table2, conditional, joinType, columns) => {
 
 
 module.exports = (test) => { 
+  conString = 'postgres://postgres:password@localhost/';
   if (test) { conString += 'test'; } // any truthy value for test will result in the test db being activated
   else { conString += 'drag-n-drop'; }
 
