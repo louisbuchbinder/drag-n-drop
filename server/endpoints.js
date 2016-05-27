@@ -1,11 +1,13 @@
 'use strict';
 
 const fs = require('fs');
-// const axios = require('axios');
 const db = require('./db/database.js')();
 
+// hard coded for now. Remove when authentication is added
 var username = 'louie';
 var userindex = '1';
+///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
+
 
 var shortenedUrls = {};
 var alphabet = 'abcdefghijklmnopqrstuvwxyz';

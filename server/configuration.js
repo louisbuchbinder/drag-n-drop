@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 var app = express();
 module.exports = app;
@@ -16,9 +16,4 @@ module.exports = app;
 
 
 app.use('/', express.static(__dirname + '/../dist/'));
-
 require('./endpoints')(app);
-// require('./socket');
-
-// const db = require('./db/database.js');
-// db.initialize(false, ()=>console.log('database initialized'));
