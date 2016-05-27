@@ -7,21 +7,23 @@ const db = require('./db/database.js')();
 var username = 'louie';
 var userindex = '1';
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
+const shortenedUrls = require('./shortenedUrls');
+const setExistingUrls = shortenedUrls.setExistingUrls;
+const generateUrl = shortenedUrls.generateUrl;
 
-
-var shortenedUrls = {};
-var alphabet = 'abcdefghijklmnopqrstuvwxyz';
-const generateUrl = () => {
-  var url = '';
-  for (var i = 0; i < 6; i++) {
-    var index = Math.floor(Math.random()*alphabet.length);
-    url += alphabet[index];
-  }
-  if (!shortenedUrls[url]) { 
-    shortenedUrls[url] = true; 
-    return '/' + url;
-  } else { return generateUrl(); }
-};
+// var shortenedUrls = {};
+// var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+// const generateUrl = () => {
+//   var url = '';
+//   for (var i = 0; i < 6; i++) {
+//     var index = Math.floor(Math.random()*alphabet.length);
+//     url += alphabet[index];
+//   }
+//   if (!shortenedUrls[url]) { 
+//     shortenedUrls[url] = true; 
+//     return '/' + url;
+//   } else { return generateUrl(); }
+// };
 
 
 
@@ -87,6 +89,8 @@ module.exports = (app) => {
 
   db.fetch('files', 'filename, link')
   .then((results) => {
+    var urls = results.rows.map((file) => file.link.slice(1) );
+    setExistingUrls(urls);
     results.rows.forEach( (file) => {
       setFileEndpoint(file.filename, file.link);
     });
