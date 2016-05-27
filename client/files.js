@@ -1,6 +1,6 @@
 const angular = require('angular');
 
-const $ = require('jquery');
+// const $ = require('jquery');
 
 var files = [];
 var updateFiles = function () {};
@@ -19,7 +19,7 @@ var updateFiles = function () {};
 
 var app = angular.module('app', []);
 // var savedFiles = angular.module('savedFiles', []);
-files.push({filename:'myFile', link:'/link'});
+// files.push({filename:'myFile', link:'/link'});
 
 // console.log(files);
 
@@ -31,7 +31,7 @@ app.controller('savedFiles', function ($scope, $http) {
   // $scope.files = currentDirectory.files;
 
   updateFiles = (filename) => {
-    console.log('update called on ' + filename);
+    // console.log('update called on ' + filename);
     $http({
       method: 'GET',
       url: '/files' + '?filename='+filename
@@ -40,8 +40,8 @@ app.controller('savedFiles', function ($scope, $http) {
       console.log(results);
       results.data.forEach((file) => files.push(file));
     })
-    .catch( (error) => console.log(error) )
-    .then(() => console.log(files));
+    .catch( (error) => console.log(error) );
+    // .then(() => console.log(files));
   };
   
 

@@ -1,8 +1,8 @@
 
 const $ = require('jquery');
 
-var updateFiles = require('./files.js');
-console.log(updateFiles);
+const updateFiles = require('./files.js');
+// console.log(updateFiles);
 
 // files.push({name:'myFile', link:'/link'});
 // files.push({name:'myFile2', link:'/link2'});
