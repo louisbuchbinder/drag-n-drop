@@ -4,11 +4,11 @@ const $ = require('jquery');
 
 const updateFiles = require('./files.js');
 
-$(() => {
+$(function () {
 
-  const allowDrop = (event) => event.preventDefault(); 
+  const allowDrop = function (event) { event.preventDefault(); };
 
-  const sendFile = (file) => {
+  const sendFile = function (file) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/save', true);
     xhr.setRequestHeader('filename', file.name);
@@ -21,10 +21,10 @@ $(() => {
     };
   };
 
-  const extractData = (event) => {};
+  const extractData = function (event) {};
 
 
-  const drop = (event) => {
+  const drop = function (event) {
     event.preventDefault();
     event.dataTransfer = event.originalEvent.dataTransfer;
 

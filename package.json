@@ -10,7 +10,7 @@
     "clean": "rm -rf dist/*",
     "build": "npm run clean && npm run copy  && npm run browserify",
     "build-dev": "npm run jshint && npm run build && npm test",
-    "copy": "cp client/index.html dist/; cp client/style.css dist/",
+    "copy": "cp client/index.html dist/; cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/; cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/;cp -r client/style dist/",
     "jshint": "jshint **/*.js",
     "browserify": "browserify client/*.js > dist/bundle.js"
   },
@@ -19,6 +19,7 @@
   "dependencies": {
     "angular": "^1.5.5",
     "bcrypt": "^0.8.6",
+    "bootstrap": "^3.3.6",
     "browserify": "^13.0.0",
     "express": "^4.13.4",
     "express-jwt": "^3.4.0",

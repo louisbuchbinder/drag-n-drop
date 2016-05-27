@@ -10,14 +10,14 @@ var updateFiles = function () {};
 
 app.controller('savedFiles', function ($scope, $http) {
 
-  updateFiles = (filename) => {
+  updateFiles = function (filename) {
     // use filename='all' to update all files
     $http({
       method: 'GET',
       url: '/files' + '?filename='+filename
     })
-    .then( (results) => results.data.forEach((file) => files.push(file)) )
-    .catch( (error) => console.error(error) );
+    .then( function (results) { results.data.forEach(function (file) { files.push(file); }); })
+    .catch( function (error) { console.error(error); });
   };
   
   $scope.updateFiles = updateFiles;
@@ -26,5 +26,5 @@ app.controller('savedFiles', function ($scope, $http) {
   updateFiles('all');
 });
 
-module.exports = (filename) => updateFiles(filename);
+module.exports = function (filename) { updateFiles(filename); };
 

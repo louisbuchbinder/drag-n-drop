@@ -3,14 +3,14 @@ const app = require('./app.js');
 
 app.controller('formController', function ($scope, $http) {
 
-  $scope.submit = (action) => {
+  $scope.submit = function (action) {
     $http({
       method: 'POST',
       url: action,
       data: {username: $scope.username, password: $scope.password}
     })
-    .then( (results) => console.log(results) )
-    .catch( (error) => console.error(error) );
+    .then( function (results) { console.log(results); })
+    .catch( function (error) { console.error(error); });
   };
   
 
