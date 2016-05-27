@@ -15,7 +15,15 @@ var create = [
 ];
 
 
-const escape$ = (string) => string.split('').filter((character)=>character!=='$').join('');
+const escape$ = (string) => {
+  return string.split('')
+  .filter((character, index) => { 
+    if (character!=='$') { return true; }
+    else if (index === string.length - 1) { return true; }
+    else if (string[index+1]==='$') { return false; }
+    else { return true; }
+  }).join('');
+};
 
 
 const makeQueries = (queries, client, done, callback) => {

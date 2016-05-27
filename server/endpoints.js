@@ -12,6 +12,8 @@ var username = 'louie';
 var userindex = '1';
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
 
+const verifyUsername = require('./authentication/authenticationHandler.js').verifyUsername;
+
 
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
 const stream = require('stream');

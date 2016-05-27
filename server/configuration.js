@@ -17,3 +17,4 @@ module.exports = app;
 
 app.use('/', express.static(__dirname + '/../dist/'));
 require('./endpoints')(app);
+require('./authentication/authentication.js').initializeEndpoints(app);

@@ -49,7 +49,7 @@ pg_ctl stop --pgdata=database/test
 
 
 ***Next Steps***
-1. Authentication with Bcrypt
+1. Login and Signup Form on Client side
 2. Files fetched from db with username token
 3. Allow for dropped directories
 5. BootstrapCSS
