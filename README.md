@@ -53,6 +53,8 @@ pg_ctl stop --pgdata=database/test
 2. Files fetched from db with username token
 3. Allow for dropped directories
 5. BootstrapCSS
+6. Environment Variables
+7. Deploy to Heroku
 
 
 
