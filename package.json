@@ -5,23 +5,30 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node index.js",
-    "start-dev": "npm run build && (sleep 2 && npm test) & nodemon index.js",
-    "test": "mocha spec/**/*.js",
-    "clean": "rm -rf dist",
-    "build": "npm run clean && npm run concat && npm run copy",
-    "copy": "cp client/* dist/",
-    "concat": "cat node_modules/jquery/dist/jquery.min.js node_modules/underscore/underscore-min.js > dist/vendors.js"
+    "start-dev": "npm run build-dev && nodemon index.js",
+    "test": "mocha spec/**/*.js; mocha server/db/spec/**/*.js",
+    "clean": "rm -rf dist/*",
+    "build": "npm run clean && npm run copy  && npm run browserify",
+    "build-dev": "npm run jshint && npm run build && npm test",
+    "copy": "cp client/index.html dist/; cp client/style.css dist/",
+    "jshint": "jshint **/*.js",
+    "browserify": "browserify client/*.js > dist/bundle.js"
   },
   "author": "Louis Buchbinder",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.5.5",
+    "axios": "^0.11.0",
     "body-parser": "^1.15.0",
+    "browserify": "^13.0.0",
     "express": "^4.13.4",
     "jquery": "^2.2.3",
+    "pg": "^4.5.5",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
     "jshint": "^2.9.2",
     "mocha": "^2.4.5"
   }

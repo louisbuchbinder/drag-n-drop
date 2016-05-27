@@ -1,0 +1,8 @@
+{
+  "ignore": ["database/*", "uploads/*", "dist/*", "node_modules/*"],
+  "events": {
+    "restart": "npm run build-dev"
+  }
+}
+
+
