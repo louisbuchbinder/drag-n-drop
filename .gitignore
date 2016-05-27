@@ -2,3 +2,4 @@ node_modules
 database/*
 dist/*
 npm-debug.log
+uploads
