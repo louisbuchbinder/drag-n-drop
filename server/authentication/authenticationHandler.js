@@ -24,8 +24,6 @@ function handleLogin(req, res) {
   .then((user) => {
     if (user.rows.length === 1) {
       user = user.rows[0];
-
-      console.log(user.password, password, password.length);
       return hash.checkHash(password, user.password);
     }
     return Promise.reject('username and password do not match1');
@@ -67,7 +65,6 @@ function handleSignup(req, res) {
     }
   })
   .then((hashed) => {
-    console.log(hashed);
     return database.insertInto('users', {username: username, password: hashed, created: String(Date.now())});
   })
   .then(() => {

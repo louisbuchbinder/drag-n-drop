@@ -1,11 +1,11 @@
-const angular = require('angular');
-
+// const angular = require('angular');
+const app = require('./app.js');
 
 var files = [];
 var updateFiles = function () {};
 
 
-var app = angular.module('app', []);
+// var app = angular.module('app', []);
 
 
 app.controller('savedFiles', function ($scope, $http) {
