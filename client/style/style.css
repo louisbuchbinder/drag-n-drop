@@ -1,0 +1,21 @@
+
+/*#dropbox {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+*/
+
+/*.jumbotron {
+    background-color:transparent !important; 
+}*/
+
+
+.jumbotron {
+    background-color: white; 
+    color: transparent;
+    padding: 5em;
+}
+
+
