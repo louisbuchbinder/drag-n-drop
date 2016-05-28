@@ -48,6 +48,13 @@ const pipeFile = (response, filename) => {
 
 module.exports = (app) => {
   
+  app.get('/signup', (request, response) => response.redirect('/'));
+  app.get('/login', (request, response) => response.redirect('/'));
+  app.get('/drop', (request, response) => response.redirect('/'));
+  app.get('/files', (request, response) => response.redirect('/'));
+  app.get('/about', (request, response) => response.redirect('/'));
+
+
   const setFileEndpoint = (filename, link) => {
     app.get(link, (request, response) => pipeFile(response, filename) );
   };
@@ -82,7 +89,7 @@ module.exports = (app) => {
 
 
 
-  app.get('/files', (request, response) => {
+  app.get('/fetchFiles', (request, response) => {
     let filename = request.query.filename;
     let where = filename !== 'all' ? {filename: filename} : '';
     db.fetch('files', 'filename, link', where)

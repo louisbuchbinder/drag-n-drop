@@ -2,7 +2,7 @@ const angular = require('angular');
 require('angular-route');
 const app = angular.module('app', ['ngRoute']);
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $locationProvider) {
   $routeProvider
   .when('/', {
     templateUrl : 'pages/home.html',
@@ -28,6 +28,8 @@ app.config(function($routeProvider) {
     templateUrl : 'pages/files.html',
     controller  : 'filesController'
   });
+
+  $locationProvider.html5Mode(true);
 });
 
 

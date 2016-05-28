@@ -14,7 +14,7 @@ app.controller('filesController', function ($scope, $http) {
     // use filename='all' to update all files
     $http({
       method: 'GET',
-      url: '/files' + '?filename='+filename
+      url: '/fetchFiles' + '?filename='+filename
     })
     .then( function (results) { results.data.forEach(function (file) { files.push(file); }); })
     .catch( function (error) { console.error(error); });
