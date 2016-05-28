@@ -113,12 +113,16 @@ const join = (table1, table2, conditional, joinType, columns) => {
   
   conditional = !conditional ? conditional : Object.keys(conditional)
                 .map((column) => {
-                  let value = escape$(conditional[column]);
-
-                  if (value.split('').some((character)=>character==='.')) {
-                    return column + '=' + value;  
+                  let value = conditional[column];
+                  if (Array.isArray(value)) {
+                    // use array if the value is meant to be interpreted directly without quotes
+                    return column + '=' + value[0];
                   }
-                  return column + '=' + '$$' + value + '$$';
+                  else {
+
+                    value = escape$(value);
+                    return column + '=' + '$$' + value + '$$';
+                  }
                 })
                 .join(' and ');
 

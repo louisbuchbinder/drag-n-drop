@@ -16,7 +16,7 @@ function handleLogin(req, res) {
   var test = req.query.test;
   var database = test ? db_test : db;
   
-  if (typeof username !== 'string' || typeof username !== 'string') {
+  if (typeof username !== 'string' || typeof password !== 'string') {
     return res.status(400).send('bad request');
   }
 
@@ -50,10 +50,9 @@ function handleSignup(req, res) {
   var test = req.query.test;
   var database = test ? db_test : db;
 
-  if (typeof username !== 'string' || typeof username !== 'string') {
+  if (typeof username !== 'string' || typeof password !== 'string') {
     return res.status(400).send('bad request');
   }
-
 
   // check if username is taken then create new user if the name is unique
   database.fetch('users', '', {username: username})
@@ -86,7 +85,7 @@ const verifyUsername = (request, response) => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, (error, payload) => {
       if (error) return reject(error);
-      if (!payload) return reject(error);
+      if (!payload) return reject('no token payload found');
       else return resolve(payload.username);
     });
   });

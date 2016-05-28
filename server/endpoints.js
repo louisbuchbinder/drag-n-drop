@@ -7,12 +7,14 @@ const shortenedUrls = require('./shortenedUrls');
 const setExistingUrls = shortenedUrls.setExistingUrls;
 const generateUrl = shortenedUrls.generateUrl;
 
+// const cookieParser = require('cookie-parser');
+
 // hard coded for now. Remove when authentication is added
 var username = 'louie';
 var userindex = '1';
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
+const authentication = require('./authentication/authentication.js');
 
-const verifyUsername = require('./authentication/authenticationHandler.js').verifyUsername;
 
 
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
@@ -89,12 +91,18 @@ module.exports = (app) => {
 
 
 
+  authentication.protect(app, '/fetchFiles');
   app.get('/fetchFiles', (request, response) => {
     let filename = request.query.filename;
-    let where = filename !== 'all' ? {filename: filename} : '';
-    db.fetch('files', 'filename, link', where)
+    let where = filename !== 'all' ? {'files.filename': filename} : {};
+    where['users.index'] = ['files.userIndex'];
+    authentication.verifyUsername(request, response)
+    .then((username) => {
+      where['users.username'] = username;
+      return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
+    })
     .then((results) => response.send(results.rows))
-    .catch((error) => response.send(400));
+    .catch((error) => {console.log(error);response.sendStatus(400);});
   });
 
 

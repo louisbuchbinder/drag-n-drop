@@ -49,7 +49,6 @@ pg_ctl stop --pgdata=database/test
 
 
 ***Next Steps***
-1. Files fetched from db with username token
 2. Environment Variables
 3. Deploy to Heroku
 4. Allow for dropped directories

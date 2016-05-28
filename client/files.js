@@ -12,6 +12,7 @@ app.controller('filesController', function ($scope, $http) {
 
   updateFiles = function (filename) {
     // use filename='all' to update all files
+    // if (filename === 'all') { files = []; }
     $http({
       method: 'GET',
       url: '/fetchFiles' + '?filename='+filename
@@ -21,9 +22,9 @@ app.controller('filesController', function ($scope, $http) {
   };
   
   $scope.updateFiles = updateFiles;
-
   $scope.files = files;
-  updateFiles('all');
+
+  if (files.length === 0) updateFiles('all');
 });
 
 module.exports = function (filename) { updateFiles(filename); };

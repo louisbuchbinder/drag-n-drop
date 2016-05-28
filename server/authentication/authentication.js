@@ -3,7 +3,7 @@ const expressJWT = require('express-jwt');
 const jwt = require('jsonwebtoken');
 
 const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 
 
 const authenticationHandler = require('./authenticationHandler.js');
@@ -15,6 +15,7 @@ module.exports.protect = function initializeJWTApp (app, route) {
   route = route ? route : '/';
   app.use(
     route,
+    cookieParser(),
     function extendHeaderWithAuthCookie(req, res, next) {
       // extend the headers with the authorization cookie 
       // expects the cookie-parser middleware to be used previously
@@ -47,6 +48,9 @@ module.exports.initializeEndpoints = (app) => {
     authenticationHandler.login
   );
 };
+
+
+module.exports.verifyUsername = authenticationHandler.verifyUsername;
 
 
 

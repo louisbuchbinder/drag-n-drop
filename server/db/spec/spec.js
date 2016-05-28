@@ -34,7 +34,7 @@ describe('Database Unit Tests', function() {
     .then(() => db.insertInto('files', {userindex: '1', filename: 'myfile', filedata: 'myfiledata'}))
     .then(() => db.insertInto('files', {userindex: '1', filename: 'myfile2', filedata: 'myfiledata2'}))
     .then(() => db.insertInto('files', {userindex: '2', filename: 'myfile3', filedata: 'myfiledata3'}))
-    .then(() => db.join('users', 'files', {'users.username': 'louie', 'users.index': 'files.userindex'}, 'JOIN', 'filename, filedata'))
+    .then(() => db.join('users', 'files', {'users.username': 'louie', 'users.index': ['files.userindex']}, 'JOIN', 'filename, filedata'))
     .then((results) => results.rows)
     ).to.eventually.deep.equal([ { filename: 'myfile', filedata: 'myfiledata' }, { filename: 'myfile2', filedata: 'myfiledata2' } ]);
   });
