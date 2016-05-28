@@ -61,6 +61,7 @@ module.exports = (app) => {
     app.get(link, (request, response) => pipeFile(response, filename) );
   };
   
+  authentication.protect(app, '/save');
   app.post('/save', (request, response) => {
 
     var filedata = '';
@@ -75,14 +76,22 @@ module.exports = (app) => {
       }
     });
     request.on('end', function () {
-      db.insertInto('files', {userindex: userindex, link: url, filename: filename, filedata: filedata})
+      authentication.verifyUsername(request, response)
+      .then((username) => {
+        return db.fetch('users', 'index', {username: username})
+        .then((results) => {
+          if (results.rows.length !== 1) { return Promise.reject('invalid user token'); }
+          return String(results.rows[0].index);
+        });
+      })
+      .then((userindex) => {
+        return db.insertInto('files', {userindex: userindex, link: url, filename: filename, filedata: filedata});
+      })
       .then(()=>{
         setFileEndpoint(filename, url);
-
         response.status(200).send('Your file was saved at ' + url); 
-        console.log('done');
       })
-      .catch((error)=>console.log(error));
+      .catch((error)=>response.status(400).send());
       
     });
   });
