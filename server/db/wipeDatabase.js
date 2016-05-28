@@ -1,8 +1,11 @@
 
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  ///// ///// 
 // Initialize Environment
-
-if (environment === '-d' || environment === '-dev' || environment === '-development' ) {
+const environment = process.argv[2];
+if (environment === '-p' || environment === '-prod' || environment === '-production' ) {
+  require('dotenv').config({path: './.envProduction'});
+}
+else if (environment === '-d' || environment === '-dev' || environment === '-development' ) {
   require('dotenv').config({path: './.envDevelopment'});
 }
 else if (environment === '-t' || environment === '-test') {
