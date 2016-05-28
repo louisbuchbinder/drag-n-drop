@@ -1,0 +1,6 @@
+NODE_ENV=production
+POSTGRES_DB_TYPE=postgres
+POSTGRES_DB_USER=gkzhdlfbrzcvuo
+POSTGRES_DB_PASSWORD=UnUJX47-qeiuONoEowbnnT2V2Y@ec2-23-21-100-145.compute-1.amazonaws.com
+POSTGRES_DB_LOCATION=5432/d5h339djcv52ds
+JWT_SECRET=twinkleFootBigYearLeapToe
