@@ -4,7 +4,7 @@ const $ = require('jquery');
 
 const updateFiles = require('./files.js');
 
-$(function () {
+//$(function () {
 
   const allowDrop = function (event) { event.preventDefault(); };
 
@@ -34,6 +34,11 @@ $(function () {
     sendFile(file);
   };
 
-  const $dropbox = $('#dropbox');
-  $dropbox.on({drop: drop, dragover: allowDrop});
-});
+
+
+//});
+  const app = require('./app.js');
+  app.controller('dropController', function ($scope) {
+    const $dropbox = $('#dropbox');
+    $dropbox.on({drop: drop, dragover: allowDrop});    
+  });

@@ -35,7 +35,7 @@ app.config(function($routeProvider, $locationProvider) {
 
 app.controller('homeController', function ($scope) {});
 app.controller('aboutController', function ($scope) {});
-app.controller('dropController', function ($scope) {});
+
 
 module.exports = app;
 
