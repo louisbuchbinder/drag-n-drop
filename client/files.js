@@ -8,7 +8,7 @@ var updateFiles = function () {};
 // var app = angular.module('app', []);
 
 
-app.controller('savedFiles', function ($scope, $http) {
+app.controller('filesController', function ($scope, $http) {
 
   updateFiles = function (filename) {
     // use filename='all' to update all files

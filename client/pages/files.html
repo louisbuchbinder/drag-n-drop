@@ -1,0 +1,21 @@
+<div class="container" ng-controller="filesController">
+  <h4>Saved Files</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>File Link</th>
+          <th>Accessible To</th>
+          <th>Share</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="data in files">
+        <td>{{data.filename}}</td>
+        <td><a href="{{data.link}}"=>{{data.link}}</a></td>
+        <td>Anyone with Link</td>
+        <td><button class="btn btn-xs btn-success">Share</button></td>
+        <td><button class="btn btn-xs btn-info">Edit</button></td>
+      </tr>
+    </table>
+</div>

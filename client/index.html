@@ -31,57 +31,14 @@
       </div>
     </nav>
 
-
-    <div class="container" ng-controller="formController">
-      <form class="form-signin">
-        <h4 class="form-signin-heading">Sign Up Here</h4>
-        <input class="form-control" type="email" placeholder="email" ng-model="username">
-        <input class="form-control" type="password" placeholder="password" ng-model="password">
-        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="submit('/signup');">Submit</button>
-      </form>
-
-      
-
-
-      <!-- <form>
-        <input type="text" placeholder="username" ng-model="username">
-        <input type="password" placeholder="password" ng-model="password">
-        <button type="button" ng-click="submit('/login');">Submit</button>
-      </form> -->
-    </div>
+   <div ng-view></div>
 
 
 
-    <!-- <h1>Drag-n-Drop File Transfer Server</h1> -->
-    <div class="container">
-      <h4>Drag files or directories into the box to upload:</h4>
-      <div id="dropbox" class="jumbotron"></div>
-    </div>
+    
 
 
 
-    <h1>Saved Files</h1>
-
-    <div ng-controller="savedFiles">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>File Name</th>
-            <th>File Link</th>
-            <th>Accessible To</th>
-            <th>Share</th>
-            <th>Options</th>
-          </tr>
-        </thead>
-        <tr ng-repeat="data in files">
-          <td>{{data.filename}}</td>
-          <td><a href="{{data.link}}"=>{{data.link}}</a></td>
-          <td>Anyone with Link</td>
-          <td><button class="btn btn-xs btn-success">Share</button></td>
-          <td><button class="btn btn-xs btn-info">Edit</button></td>
-        </tr>
-      </table>
-    </div>
     
   </body>
 </html>

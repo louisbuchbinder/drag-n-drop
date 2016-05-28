@@ -49,12 +49,11 @@ pg_ctl stop --pgdata=database/test
 
 
 ***Next Steps***
-1. Login and Signup Form on Client side
-2. Files fetched from db with username token
-3. Allow for dropped directories
-5. BootstrapCSS
-6. Environment Variables
-7. Deploy to Heroku
+0. Single Page Navigation
+1. Files fetched from db with username token
+2. Environment Variables
+3. Deploy to Heroku
+4. Allow for dropped directories
 
 
 
