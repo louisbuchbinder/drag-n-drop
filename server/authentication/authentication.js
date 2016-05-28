@@ -8,11 +8,11 @@ const cookieParser = require('cookie-parser');
 
 const authenticationHandler = require('./authenticationHandler.js');
 
-var secret = 'temporarySecret';
-exceptions = ['/signup', '/login'];
+const secret = process.env.JWT_SECRET;
 
-module.exports.protect = function initializeJWTApp (app, route) {
+module.exports.protect = function initializeJWTApp (app, route, exceptions) {
   route = route ? route : '/';
+  exceptions = exceptions ? exceptions : [];
   app.use(
     route,
     cookieParser(),

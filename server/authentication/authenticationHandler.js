@@ -7,7 +7,7 @@ const db_test = db; //come back to this later to remove dbtest//= require(__dirn
 
 const jwt = require('jsonwebtoken');
 const hash = require('./hash.js');
-const secret = 'temporarySecret';
+const secret = process.env.JWT_SECRET;
 
 // this module requires the body-parser middleware to be used previously
 function handleLogin(req, res) {

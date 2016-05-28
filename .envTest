@@ -3,3 +3,4 @@ POSTGRES_DB_TYPE=postgres
 POSTGRES_DB_USER=postgres
 POSTGRES_DB_PASSWORD=password
 POSTGRES_DB_LOCATION=localhost/test
+JWT_SECRET=temporarySecret

@@ -14,3 +14,4 @@ else { console.log('Error: No environment detected'); process.exit(1); }
 const db = require('./database');
 db.initialize(true, ()=> { console.log('done'); process.exit(); });
 
+///// /////  ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  ///// ///// 

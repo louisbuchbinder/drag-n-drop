@@ -1,7 +1,6 @@
 
 "use strict";
 
-
 const pg = require('pg');
 let conString;
 

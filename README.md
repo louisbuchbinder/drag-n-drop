@@ -49,7 +49,7 @@ pg_ctl stop --pgdata=database/test
 
 
 ***Next Steps***
-2. Environment Variables
+
 3. Deploy to Heroku
 4. Allow for dropped directories
 5. Home Page
