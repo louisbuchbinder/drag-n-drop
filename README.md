@@ -51,6 +51,7 @@ pg_ctl stop --pgdata=database/test
 
 
 ***Next Steps***
+
 1. Reload App on signup
 2. onEnter event for signup and login
 3. Home Page
