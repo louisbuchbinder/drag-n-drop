@@ -8,6 +8,8 @@
 
 
 ***Contributions Welcome***
+Please make pull requests to the dev branch
+
 
 ```
 // Dependencies
