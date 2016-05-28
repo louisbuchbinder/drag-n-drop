@@ -4,8 +4,8 @@
   "description": "Drag files into client browser. Create a copy on the server.",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node index.js",
-    "start-dev": "npm run build-dev && nodemon index.js",
+    "start": "npm run build && node index.js -production",
+    "start-dev": "npm run build-dev && nodemon index.js -development",
     "test": "mocha spec/**/*.js; mocha server/db/spec/**/*.js",
     "clean": "rm -rf dist/*",
     "build": "npm run clean && npm run copy  && npm run browserify",
@@ -13,7 +13,8 @@
     "copy": "cp client/index.html dist/; cp -r client/pages dist/; cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/; cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/;cp -r client/style dist/",
     "jshint": "jshint **/*.js",
     "browserify": "browserify client/*.js > dist/bundle.js",
-    "wipe-db": "node server/db/wipeDatabase.js"
+    "wipe-db": "node server/db/wipeDatabase.js -development",
+    "wipe-db-test": "node server/db/wipeDatabase.js -test"
   },
   "author": "Louis Buchbinder",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "bootstrap": "^3.3.6",
     "browserify": "^13.0.0",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-jwt": "^3.4.0",
     "jquery": "^2.2.3",

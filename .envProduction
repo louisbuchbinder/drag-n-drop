@@ -1,0 +1,5 @@
+NODE_ENV=production
+POSTGRES_DB_TYPE=postgres
+POSTGRES_DB_USER=pxzaeueuxznomn
+POSTGRES_DB_PASSWORD=nIS-s5B_Ngpe9kCkhVrzj3yVz1@ec2-54-163-230-90.compute-1.amazonaws.com
+POSTGRES_DB_LOCATION=5432/d4ema1c4gmv4im

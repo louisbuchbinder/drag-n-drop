@@ -1,8 +1,33 @@
 
 "use strict";
 
+
 const pg = require('pg');
-var conString;
+let conString;
+
+if (process.env.NODE_ENV === 'production') {
+  pg.defaults.ssl = true;
+  conString = 
+    process.env.POSTGRES_DB_TYPE + '://' + 
+    process.env.POSTGRES_DB_USER + ':' +
+    process.env.POSTGRES_DB_PASSWORD + ':' + 
+    process.env.POSTGRES_DB_LOCATION;
+}
+if (process.env.NODE_ENV === 'development') {
+  conString = 
+    process.env.POSTGRES_DB_TYPE + '://' + 
+    process.env.POSTGRES_DB_USER + ':' +
+    process.env.POSTGRES_DB_PASSWORD + '@' + 
+    process.env.POSTGRES_DB_LOCATION;
+}
+if (process.env.NODE_ENV === 'test') {
+  conString = 
+    process.env.POSTGRES_DB_TYPE + '://' + 
+    process.env.POSTGRES_DB_USER + ':' +
+    process.env.POSTGRES_DB_PASSWORD + '@' + 
+    process.env.POSTGRES_DB_LOCATION;
+}
+
 
 var clean = [
   'DROP TABLE IF EXISTS files CASCADE',
@@ -132,16 +157,22 @@ const join = (table1, table2, conditional, joinType, columns) => {
 };
 
 
-module.exports = (test) => { 
-  conString = 'postgres://postgres:password@localhost/';
-  if (test) { conString += 'test'; } // any truthy value for test will result in the test db being activated
-  else { conString += 'drag-n-drop'; }
+// module.exports = (test) => { 
+//   conString = 'postgres://postgres:password@localhost/';
+//   if (test) { conString += 'test'; } // any truthy value for test will result in the test db being activated
+//   else { conString += 'drag-n-drop'; }
 
-  return {
-    initialize: initialize,
-    insertInto: insertInto,
-    fetch: fetch,
-    join: join
-  };
+//   return {
+//     initialize: initialize,
+//     insertInto: insertInto,
+//     fetch: fetch,
+//     join: join
+//   };
+// };
+
+module.exports = {
+  initialize: initialize,
+  insertInto: insertInto,
+  fetch: fetch,
+  join: join
 };
-

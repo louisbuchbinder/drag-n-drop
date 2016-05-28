@@ -1,8 +1,8 @@
 'use strict';
 
 // testing environment should be triggered by environment variable instead of query parameters
-const db = require(__dirname + '/../db/database.js')();
-const db_test = require(__dirname + '/../db/database.js')();
+const db = require(__dirname + '/../db/database.js');
+const db_test = db; //come back to this later to remove dbtest//= require(__dirname + '/../db/database.js')();
 
 
 const jwt = require('jsonwebtoken');

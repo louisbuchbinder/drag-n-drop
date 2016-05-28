@@ -2,7 +2,7 @@
 
 
 
-const db = require('./db/database.js')();
+const db = require('./db/database.js');
 const shortenedUrls = require('./shortenedUrls');
 const setExistingUrls = shortenedUrls.setExistingUrls;
 const generateUrl = shortenedUrls.generateUrl;
