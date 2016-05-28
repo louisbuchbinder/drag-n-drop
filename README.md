@@ -56,6 +56,8 @@ pg_ctl stop --pgdata=database/test
 6. About Page
 7. Testing
 8. onEnter event for signup and login
+9. Edit modal
+10. Share modal
 
 
 
