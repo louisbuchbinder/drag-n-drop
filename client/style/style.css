@@ -1,25 +1,20 @@
 
-/*#dropbox {
-  width: 350px;
-  height: 70px;
-  padding: 10px;
-  border: 1px solid #aaaaaa;
+.jumbotron h1 {
+  color: white;
+  text-align: center;
 }
-*/
-
-/*.jumbotron {
-    background-color:transparent !important; 
-}*/
-
 
 .jumbotron {
-  background-color: white; 
+  background-color: black; 
   color: transparent;
   padding: 5em;
 }
 
+
 .img-half {
- max-width: 50%; 
+ max-width: 40%; 
 }
+
+
 
 
