@@ -26,13 +26,13 @@ function handleLogin(req, res) {
       user = user.rows[0];
       return hash.checkHash(password, user.password);
     }
-    return Promise.reject('username and password do not match1');
+    return Promise.reject('username and password do not match');
   })
   .then((bool) => {
     if (bool) {
       return Promise.resolve()
     }
-    return Promise.reject('username and password do not match2');
+    return Promise.reject('username and password do not match');
   })
   .then(() => {
     let token = jwt.sign({username: username}, secret);
@@ -68,7 +68,7 @@ function handleSignup(req, res) {
   })
   .then(() => {
     var token = jwt.sign({username: username}, secret);
-    res.cookie('authorization', 'Bearer ' + token).status(200).send();
+    res.cookie('authorization', 'Bearer ' + token).status(201).send();
     return Promise.resolve();
   })
   .catch((error) => {

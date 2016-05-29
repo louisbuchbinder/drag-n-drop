@@ -1,6 +1,7 @@
 'use strict';
 
-
+// const fs = require('fs');
+const cookieParser = require('cookie-parser');
 
 const db = require('./db/database.js');
 const shortenedUrls = require('./shortenedUrls');
@@ -49,12 +50,25 @@ const pipeFile = (response, filename) => {
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////
 
 module.exports = (app) => {
+
+  if (process.env.NODE_ENV === 'test') {
+    authentication.protect(app, '/protected');
+    app.get('/protected', (request, response) => response.status(200).send());
+  }
   
   app.get('/signup', (request, response) => response.redirect('/'));
   app.get('/login', (request, response) => response.redirect('/'));
   app.get('/drop', (request, response) => response.redirect('/'));
   app.get('/files', (request, response) => response.redirect('/'));
   app.get('/about', (request, response) => response.redirect('/'));
+  app.get('/logout', (request, response) => response.cookie('authorization', '').redirect('/'));
+
+
+  app.get('/username', cookieParser(), (request, response) => {
+    authentication.verifyUsername(request, response)
+    .then((username) => response.send({username: username}))
+    .catch(() => response.send({username: null}));
+  });
 
 
   const setFileEndpoint = (filename, link) => {

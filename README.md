@@ -52,15 +52,11 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
-3. Deploy to Heroku
-4. Allow for dropped directories
-5. Home Page
-6. About Page
-7. Testing
-8. onEnter event for signup and login
-9. Edit modal
-10. Share modal
-
+1. Testing
+2. Delete File in edit modal
+3. Change Permissions in edit modal
+4. toggle collapse only if aria expanded...
+5. Allow for dropped directories
 
 
 

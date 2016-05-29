@@ -11,10 +11,13 @@ app.controller('signupController', function ($scope, $http) {
       url: '/signup',
       data: {username: $scope.username, password: $scope.password}
     })
-    .then( function (results) { console.log(results); })
-    .catch( function (error) { console.error(error); });
+    .then( function (results) { console.log(results); location.href = '/'; })
+    .catch( function (error) { 
+      $scope.error = true;
+      $scope.errorMessage = error.data; 
+    });
   };
-  
+  $scope.error = false;
   $scope.username = '';
   $scope.password = '';
 });
@@ -28,9 +31,12 @@ app.controller('loginController', function ($scope, $http) {
       data: {username: $scope.username, password: $scope.password}
     })
     .then( function (results) { console.log(results); location.href = '/'; })
-    .catch( function (error) { console.error(error); });
+    .catch( function (error) { 
+      $scope.error = true;
+      $scope.errorMessage = error.data; 
+    });
   };
-  
+  $scope.error = false;
   $scope.username = '';
   $scope.password = '';
 });
