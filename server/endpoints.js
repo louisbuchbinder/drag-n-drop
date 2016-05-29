@@ -1,6 +1,7 @@
 'use strict';
 
-
+// const fs = require('fs');
+const cookieParser = require('cookie-parser');
 
 const db = require('./db/database.js');
 const shortenedUrls = require('./shortenedUrls');
@@ -56,6 +57,13 @@ module.exports = (app) => {
   app.get('/files', (request, response) => response.redirect('/'));
   app.get('/about', (request, response) => response.redirect('/'));
   app.get('/logout', (request, response) => response.cookie('authorization', '').redirect('/'));
+
+
+  app.get('/username', cookieParser(), (request, response) => {
+    authentication.verifyUsername(request, response)
+    .then((username) => response.send({username: username}))
+    .catch(() => response.send({username: null}));
+  });
 
 
   const setFileEndpoint = (filename, link) => {

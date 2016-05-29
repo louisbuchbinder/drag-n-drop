@@ -52,13 +52,13 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
-0. hide/show nav based on token
 1. Edit modal
 2. Share modal
 3. Home Page
 4. About Page
 5. Testing
 6. Allow for dropped directories
+7.toggle collapse only if aria expanded...
 
 
 

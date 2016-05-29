@@ -37,7 +37,10 @@ app.config(function($routeProvider, $locationProvider) {
 });
 
 
-app.controller('homeController', function ($scope) {});
+app.controller('homeController', function ($scope) {
+
+});
+
 app.controller('aboutController', function ($scope) {});
 
 
