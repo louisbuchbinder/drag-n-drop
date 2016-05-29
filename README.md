@@ -52,7 +52,6 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
-1. email validation
 2. add logout
 3. Home Page
 4. About Page
