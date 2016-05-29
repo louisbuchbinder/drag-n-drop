@@ -55,6 +55,7 @@ module.exports = (app) => {
   app.get('/drop', (request, response) => response.redirect('/'));
   app.get('/files', (request, response) => response.redirect('/'));
   app.get('/about', (request, response) => response.redirect('/'));
+  app.get('/logout', (request, response) => response.cookie('authorization', '').redirect('/'));
 
 
   const setFileEndpoint = (filename, link) => {

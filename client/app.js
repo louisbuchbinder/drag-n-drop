@@ -27,6 +27,10 @@ app.config(function($routeProvider, $locationProvider) {
   .when('/files', {
     templateUrl : 'pages/files.html'//,
     // controller  : 'filesController'
+  })
+  .when('/logout', {
+    templateUrl : 'pages/home.html',
+    controller  : 'logoutController'
   });
 
   $locationProvider.html5Mode(true);
@@ -35,6 +39,18 @@ app.config(function($routeProvider, $locationProvider) {
 
 app.controller('homeController', function ($scope) {});
 app.controller('aboutController', function ($scope) {});
+
+
+/* globals location */
+app.controller('logoutController', function ($scope, $http) {
+  $http({
+    url: '/logout',
+    method: 'GET'
+  })
+  .then(function () {
+    location.href = '/';
+  });
+});
 
 
 module.exports = app;

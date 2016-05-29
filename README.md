@@ -52,14 +52,12 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
-2. add logout
+1. Edit modal
+2. Share modal
 3. Home Page
 4. About Page
-5. Edit modal
-6. Share modal
-7. Testing
-8. Allow for dropped directories
-
+5. Testing
+6. Allow for dropped directories
 
 
 
