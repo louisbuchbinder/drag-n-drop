@@ -68,7 +68,7 @@ function handleSignup(req, res) {
   })
   .then(() => {
     var token = jwt.sign({username: username}, secret);
-    res.cookie('authorization', 'Bearer ' + token).status(200).send();
+    res.cookie('authorization', 'Bearer ' + token).status(201).send();
     return Promise.resolve();
   })
   .catch((error) => {

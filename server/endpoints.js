@@ -50,6 +50,11 @@ const pipeFile = (response, filename) => {
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////
 
 module.exports = (app) => {
+
+  if (process.env.NODE_ENV === 'test') {
+    authentication.protect(app, '/protected');
+    app.get('/protected', (request, response) => response.status(200).send());
+  }
   
   app.get('/signup', (request, response) => response.redirect('/'));
   app.get('/login', (request, response) => response.redirect('/'));

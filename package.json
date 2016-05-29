@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && node index.js -production",
     "start-dev": "npm run build-dev && nodemon index.js -development",
-    "test": "mocha spec/**/*.js; mocha server/db/spec/**/*.js",
+    "test": "mocha spec/**/*.js; mocha server/db/spec/**/*.js; mocha server/authentication/spec/**/*.js",
     "clean": "rm -rf dist/*",
     "build": "npm run clean && npm run copy  && npm run browserify",
     "build-dev": "npm run jshint && npm run build && npm test",
