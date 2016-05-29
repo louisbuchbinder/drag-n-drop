@@ -52,6 +52,7 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
+0. hide/show nav based on token
 1. Edit modal
 2. Share modal
 3. Home Page
