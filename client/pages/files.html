@@ -15,7 +15,7 @@
         <td><a href="{{data.link}}" target="_blank">{{data.link}}</a></td>
         <td>Anyone with Link</td>
         <td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#shareModal" ng-click="setCurrent(data);">Share</button></td>
-        <td><button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal">Edit</button></td>
+        <td><button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal" ng-click="setCurrent(data);">Edit</button></td>
       </tr>
     </table>
 
@@ -36,7 +36,30 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
+    </div>
+  </div>
 
+  <div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit {{currentFile.filename}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Accessibility<span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-click="inDevelopment();"><a>Anyone with Link</a></li>
+              <li ng-click="inDevelopment();"><a>Password Protected</a></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-danger" ng-click="inDevelopment();">Delete</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 
