@@ -1,8 +1,8 @@
 <div class="container" ng-controller="signupController">
-  <form class="form-signin">
+  <form class="form-signin" ng-submit="submit();">
     <h4 class="form-signin-heading">Sign Up Here</h4>
     <input class="form-control" type="email" placeholder="email" ng-model="username">
     <input class="form-control" type="password" placeholder="password" ng-model="password">
-    <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="submit();">Submit</button>
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"></button>
   </form>
 </div>
