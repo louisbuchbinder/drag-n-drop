@@ -11,7 +11,7 @@ app.controller('signupController', function ($scope, $http) {
       url: '/signup',
       data: {username: $scope.username, password: $scope.password}
     })
-    .then( function (results) { console.log(results); })
+    .then( function (results) { console.log(results); location.href = '/'; })
     .catch( function (error) { console.error(error); });
   };
   
