@@ -6,7 +6,7 @@
     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"></button>
   </form>
 
-  <div class="alert alert-warning" ng-model="noError" ng-hide="noError">
+  <div class="alert alert-warning" ng-model="noError" ng-show="error">
     <strong>Error!</strong>
     <p>{{errorMessage}}</p>
   </div>

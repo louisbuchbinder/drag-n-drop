@@ -21,6 +21,17 @@ app.controller('filesController', function ($scope, $http) {
     .catch( function (error) { console.error(error); });
   };
   
+  $scope.setCurrent = function (data) {
+    $scope.currentFile.filename = data.filename;
+    $scope.currentFile.link = data.link;
+  };
+  
+  /*globals alert*/
+  $scope.inDevelopment = function () {
+    alert('In Development!');
+  };
+
+  $scope.currentFile = {};
   $scope.updateFiles = updateFiles;
   $scope.files = files;
 

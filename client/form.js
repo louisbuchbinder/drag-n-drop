@@ -13,11 +13,11 @@ app.controller('signupController', function ($scope, $http) {
     })
     .then( function (results) { console.log(results); location.href = '/'; })
     .catch( function (error) { 
-      $scope.noError = false;
+      $scope.error = true;
       $scope.errorMessage = error.data; 
     });
   };
-  $scope.noError = true;
+  $scope.error = false;
   $scope.username = '';
   $scope.password = '';
 });
@@ -32,11 +32,11 @@ app.controller('loginController', function ($scope, $http) {
     })
     .then( function (results) { console.log(results); location.href = '/'; })
     .catch( function (error) { 
-      $scope.noError = false;
+      $scope.error = true;
       $scope.errorMessage = error.data; 
     });
   };
-  $scope.noError = true;
+  $scope.error = false;
   $scope.username = '';
   $scope.password = '';
 });

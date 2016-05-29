@@ -14,8 +14,30 @@
         <td>{{data.filename}}</td>
         <td><a href="{{data.link}}" target="_blank">{{data.link}}</a></td>
         <td>Anyone with Link</td>
-        <td><button class="btn btn-xs btn-success">Share</button></td>
-        <td><button class="btn btn-xs btn-info">Edit</button></td>
+        <td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#shareModal" ng-click="setCurrent(data);">Share</button></td>
+        <td><button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal">Edit</button></td>
       </tr>
     </table>
+
+
+  <div id="shareModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Share {{currentFile.filename}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>Full Link: <a href="https://drop-zone-herokuapp.com{{currentFile.link}}">https://drop-zone-herokuapp.com{{currentFile.link}}</a></p>
+          <button class="btn btn-xs btn-info" ng-click="inDevelopment();">Email</button>
+          <button class="btn btn-xs btn-info" ng-click="inDevelopment();">Other Social Media...</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
