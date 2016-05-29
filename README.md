@@ -52,15 +52,14 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
-
-2. onEnter event for signup and login
+1. email validation
+2. add logout
 3. Home Page
 4. About Page
 5. Edit modal
 6. Share modal
 7. Testing
 8. Allow for dropped directories
-9. add logout
 
 
 
