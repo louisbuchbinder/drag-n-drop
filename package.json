@@ -10,7 +10,7 @@
     "clean": "rm -rf dist/*",
     "build": "npm run clean && npm run copy  && npm run browserify",
     "build-dev": "npm run jshint && npm run build && npm test",
-    "copy": "cp client/index.html dist/; cp -r client/pages dist/; cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/; cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/;cp -r client/style dist/",
+    "copy": "cp client/index.html dist/; cp -r client/pages dist/; cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/; cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/;cp -r client/style dist/; cp client/louie.jpg dist/",
     "jshint": "jshint **/*.js",
     "browserify": "browserify client/*.js > dist/bundle.js",
     "wipe-db": "node server/db/wipeDatabase.js -development",

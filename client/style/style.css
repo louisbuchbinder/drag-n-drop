@@ -13,9 +13,13 @@
 
 
 .jumbotron {
-    background-color: white; 
-    color: transparent;
-    padding: 5em;
+  background-color: white; 
+  color: transparent;
+  padding: 5em;
+}
+
+.img-half {
+ max-width: 50%; 
 }
 
 

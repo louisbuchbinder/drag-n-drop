@@ -53,12 +53,11 @@ pg_ctl stop --pgdata=database/test
 ***Next Steps***
 
 1. Home Page
-2. About Page
-3. Testing
-4. Allow for dropped directories
-5. Delete File in edit modal
-6. Change Permissions in edit modal
-7.toggle collapse only if aria expanded...
+2. Testing
+3. Allow for dropped directories
+4. Delete File in edit modal
+5. Change Permissions in edit modal
+6.toggle collapse only if aria expanded...
 
 
 
