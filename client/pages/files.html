@@ -7,7 +7,7 @@
           <th>File Link</th>
           <th>Accessible To</th>
           <th>Share</th>
-          <th>Options</th>
+          <th ng-show="loggedIn[0]">Options</th>
         </tr>
       </thead>
       <tr ng-repeat="data in files">
