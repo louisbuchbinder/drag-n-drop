@@ -3,18 +3,23 @@
   <h1>Welcome to the Drop Zone!</h1>
   <h4>The Drag-n-Drop Cloud Storage System for All your Files</h4>
   
-  <div class="container" ng-controller="dropController">
+  <div ng-controller="dropController">
+    <div class="alert alert-info" ng-show="processing">
+      <strong>Processing Your File!</strong>
+    </div>
+    <div class="alert alert-success" ng-show="saved">
+      <strong>{{lastFile.filename}} was Saved!</strong>
+      <p>To download your file visit <a href="https://drop-zone.herokuapp.com{{lastFile.link}}">drop-zone.herokuapp.com{{lastFile.link}}</a></p>
+    </div>
     <h4>Drag files into the drop zone to upload:</h4>
     <div id="dropbox" class="jumbotron">
       <h1>DROP ZONE</h1>
       <p ng-show="loggedIn[0]">logged in as {{username[0]}}</p>
       <p ng-hide="loggedIn[0]">Public. Please <a href="/signup">signup</a>/<a href="/login">login</a> to enter private mode.</p>
     </div>
-    <div class="alert alert-success" ng-show="">
-      <strong>File Saved!</strong>
-      <p>Your File was Saved at "INSERT LINK HERE"</p>
-    </div>
   </div>
+
+  <div ng-controller="filesController"><!-- load the filesController to gain access to the update files method on initial page load --></div>
 
   <br>
   <br>

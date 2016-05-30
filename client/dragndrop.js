@@ -2,14 +2,6 @@
 
 const $ = require('jquery');
 
-const updateFiles = require('./files.js');
-
-//$(function () {
-
-
-
-
-//});
 const app = require('./app.js');
 app.controller('dropController', function ($scope, $sharedProps) {
 
@@ -24,7 +16,14 @@ app.controller('dropController', function ($scope, $sharedProps) {
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
         // updateFiles(file.name);
-        $sharedProps.updateFiles[0](file.name);
+        $sharedProps.updateFiles[0](file.name, function () {
+
+          console.log('saved');
+          $scope.lastFile = $sharedProps.lastFile[0];
+          $scope.saved = true;
+          $scope.processing = false;
+        });
+
       }
     };
   };
@@ -34,6 +33,7 @@ app.controller('dropController', function ($scope, $sharedProps) {
   const blockDrop = function (event) { event.preventDefault(); }; 
 
   const drop = function (event) {
+    $scope.$apply(function () { $scope.processing = true; });
     event.preventDefault();
     event.dataTransfer = event.originalEvent.dataTransfer;
     // currently only hardcoded for single files
@@ -44,7 +44,9 @@ app.controller('dropController', function ($scope, $sharedProps) {
   $('body').on({drop: blockDrop, dragover: allowDrop});
 
   const $dropbox = $('#dropbox');
-  $dropbox.on({drop: drop, dragover: allowDrop});    
+  $dropbox.on({drop: drop});    
+
   $scope.loggedIn = $sharedProps.loggedIn;
   $scope.username = $sharedProps.username;
+
 });

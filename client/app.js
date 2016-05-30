@@ -18,7 +18,7 @@ app.config(function($routeProvider, $locationProvider) {
     templateUrl : 'pages/signup.html'
   })
   .when('/files', {
-    templateUrl : 'pages/files.html'//,
+    templateUrl : 'pages/files.html'
   })
   .when('/logout', {
     templateUrl : 'pages/home.html',
@@ -32,9 +32,16 @@ app.config(function($routeProvider, $locationProvider) {
 app.service('$sharedProps', function () {
   var loggedIn = [false];
   var username = [null];
+  var updateFiles = [function(){}];
+  var files = {files:[]};
+  var lastFile = [null];
+
   return {
     loggedIn: loggedIn,
-    username: username
+    username: username,
+    updateFiles: updateFiles,
+    files: files,
+    lastFile: lastFile
   };
 });
 
