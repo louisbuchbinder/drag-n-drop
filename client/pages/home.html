@@ -2,6 +2,18 @@
 <div class="container" ng-controller="homeController">
   <h1>Welcome to the Drop Zone!</h1>
   <h4>The Drag-n-Drop Cloud Storage System for All your Files</h4>
+  
+  <div class="container" ng-controller="dropController">
+    <h4>Drag files into the drop zone to upload:</h4>
+    <div id="dropbox" class="jumbotron">
+      <h1>DROP ZONE</h1>
+    </div>
+    <div class="alert alert-success" ng-model="noError" ng-show="error">
+      <strong>File Saved!</strong>
+      <p>Your File was Saved at "INSERT LINK HERE"</p>
+    </div>
+  </div>
+
   <br>
   <br>
   <p>Simply Drag your Files into the <b>Drop Zone</b> and ...</p>
