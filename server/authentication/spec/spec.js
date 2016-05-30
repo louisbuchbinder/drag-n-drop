@@ -1,6 +1,9 @@
 
 require('dotenv').config({path: __dirname + '/../../../.envTest'});
 require(__dirname + '/../../../index.js');
+const port = process.env.PORT || 3001;
+
+
 
 const chai = require('chai');
 const chaiAsPromised = require("chai-as-promised");
@@ -19,7 +22,7 @@ describe('Authentication Integration Tests', function() {
 
   it('should block the protected page', function() {
     return expect(
-      axios.get('http://localhost:3000/protected')
+      axios.get('http://localhost:' + port + '/protected')
       .catch(function (error) { return error; })
       .then(function (res) { return res.status; })
     ).to.eventually.equal(400);
@@ -34,7 +37,7 @@ describe('Authentication Integration Tests', function() {
 
   it('should create a session token and save it as a cookie', function () {
     return expect(
-      axios.post('http://localhost:3000/signup', {username: 'louie', password: 'password123'})
+      axios.post('http://localhost:' + port + '/signup', {username: 'louie', password: 'password123'})
       .then(function (res) { 
         cookie = res.headers['set-cookie'][0].split(';')[0];
         return res.status;
@@ -44,7 +47,7 @@ describe('Authentication Integration Tests', function() {
 
   it('should use the cookie to access the protected page', function () {
     return expect(
-      axios.get('http://localhost:3000/protected', {headers: {cookie: cookie}})
+      axios.get('http://localhost:' + port + '/protected', {headers: {cookie: cookie}})
       .catch(function (val) {return val; })
       .then(function (res) { return res.status; })
     ).to.eventually.equal(200);
