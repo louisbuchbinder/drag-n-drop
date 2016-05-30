@@ -1,18 +1,12 @@
 'use strict';
 
-// const fs = require('fs');
+const fs = require('fs');
 const cookieParser = require('cookie-parser');
 
 const db = require('./db/database.js');
 const shortenedUrls = require('./shortenedUrls');
 const setExistingUrls = shortenedUrls.setExistingUrls;
 const generateUrl = shortenedUrls.generateUrl;
-
-// const cookieParser = require('cookie-parser');
-
-// hard coded for now. Remove when authentication is added
-// var username = 'louie';
-// var userindex = '1';
 
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
 const authentication = require('./authentication/authentication.js');
@@ -76,19 +70,38 @@ module.exports = (app) => {
   
   // authentication.protect(app, '/save');
   app.post('/save', cookieParser(), (request, response) => {
+    
 
-    var filedata = '';
-    var filename = request.headers.filename || 'no_name_file';
+    let filedata = '';
+    let filename = request.headers.filename || 'no_name_file';
 
     let url = generateUrl();
+    let dataSize = 0;
+    let tooLarge = false;
+
+    // let writeStream = fs.createWriteStream('./uploads' + url);
 
     request.on('readable', function(){
-      var buffer = request.read();
-      if (buffer) { 
-        filedata += buffer.toString('hex');
+      if (!tooLarge) {
+        let buffer = request.read();
+        if (buffer) { 
+          dataSize += buffer.length;
+          if (dataSize > 19000000) { 
+            console.log(dataSize);
+            // request.pause();
+            tooLarge = true;
+            request.emit('end');
+            // response.removeAllListeners('data');
+            // response.status(400).send('File size is too large. 19mb limit!'); 
+          }
+          // writeStream.write(buffer.toString('hex'));
+          filedata += buffer.toString('hex');
+        }
       }
     });
     request.on('end', function () {
+      if (tooLarge) return response.status(400).send('File size is too large. 19mb limit!'); 
+
       authentication.verifyUsername(request, response)
       .then((username) => db.fetch('users', 'index', {username: username}) )
       .catch(() => db.fetch('users', 'index', {username: 'public'}) )
@@ -97,6 +110,7 @@ module.exports = (app) => {
         return String(results.rows[0].index);
       })
       .then((userindex) => {
+        // let readStream = fs.createReadStream('./uploads' + url);
         return db.insertInto('files', {userindex: userindex, link: url, filename: filename, filedata: filedata});
       })
       .then(()=>{

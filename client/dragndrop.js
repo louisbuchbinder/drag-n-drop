@@ -8,12 +8,17 @@ app.controller('dropController', function ($scope, $sharedProps) {
   const allowDrop = function (event) { event.preventDefault(); };
 
   const sendFile = function (file) {
+    console.log('send file');
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/save', true);
     xhr.setRequestHeader('filename', file.name);
     xhr.send(file);
 
     xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 400) {
+        console.error('400 received');
+        // xhr.abort();
+      }
       if (xhr.readyState === 4 && xhr.status === 200) {
         // updateFiles(file.name);
         $sharedProps.updateFiles[0](file.name, function () {
@@ -33,7 +38,11 @@ app.controller('dropController', function ($scope, $sharedProps) {
   const blockDrop = function (event) { event.preventDefault(); }; 
 
   const drop = function (event) {
-    $scope.$apply(function () { $scope.processing = true; });
+    console.log('drop file');
+    $scope.$apply(function () { 
+      $scope.saved = false;
+      $scope.processing = true; 
+    });
     event.preventDefault();
     event.dataTransfer = event.originalEvent.dataTransfer;
     // currently only hardcoded for single files
