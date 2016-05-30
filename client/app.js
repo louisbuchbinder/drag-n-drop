@@ -1,4 +1,4 @@
-const angular = require('angular');
+  const angular = require('angular');
 require('angular-route');
 const app = angular.module('app', ['ngRoute']);
 
@@ -20,10 +20,10 @@ app.config(function($routeProvider, $locationProvider) {
     templateUrl : 'pages/signup.html'//,
     // controller  : 'signupController'
   })
-  .when('/drop', {
-    templateUrl : 'pages/drop.html'//,
-    // controller  : 'dropController'
-  })
+  // .when('/drop', {
+  //   templateUrl : 'pages/drop.html'//,
+  //   // controller  : 'dropController'
+  // })
   .when('/files', {
     templateUrl : 'pages/files.html'//,
     // controller  : 'filesController'
