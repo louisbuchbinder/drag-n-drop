@@ -37,6 +37,26 @@ app.config(function($routeProvider, $locationProvider) {
 });
 
 
+app.service('$sharedProps', function () {
+  var loggedIn = false;
+  var username = null;
+  return {
+    getLoggedIn: function () {
+        return loggedIn;
+    },
+    setLoggedIn: function(value) {
+        loggedIn = value;
+    },
+    getUsername: function () {
+        return username;
+    },
+    setUsername: function(value) {
+        username = value;
+    }
+  };
+});
+
+
 app.controller('homeController', function ($scope) {
 
 });
