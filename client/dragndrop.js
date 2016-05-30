@@ -38,7 +38,9 @@ const updateFiles = require('./files.js');
 
 //});
   const app = require('./app.js');
-  app.controller('dropController', function ($scope) {
+  app.controller('dropController', function ($scope, $sharedProps) {
     const $dropbox = $('#dropbox');
     $dropbox.on({drop: drop, dragover: allowDrop});    
+    $scope.loggedIn = $sharedProps.loggedIn;
+    $scope.username = $sharedProps.username;
   });

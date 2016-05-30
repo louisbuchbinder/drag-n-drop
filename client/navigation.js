@@ -1,42 +1,28 @@
+
 const app = require('./app.js');
 
-var setUsername, getUsername, isLoggedIn;
-
-app.controller('navigationController', function ($scope, $http) {
+app.controller('navigationController', function ($scope, $http, $sharedProps) {
   
-  $scope.loggedIn = false;
-  $scope.username = null;
+  $scope.loggedIn = $sharedProps.loggedIn;
+  $scope.username = $sharedProps.username;
 
-  isLoggedIn = function () {
-    return $scope.loggedIn;
-  };
-
-  getUsername = function () { return $scope.username; };
-
-  setUsername = function () {
+  var setUsername = function () {
     return $http({
       url:'/username',
       method:'GET'
     })
     .then(function (results) {
       var username = results.data.username;
-      $scope.username = username;
+      $sharedProps.username[0] = username;
       if (username) {
-        $scope.loggedIn = true; 
+        $sharedProps.loggedIn[0] = true;
       } else {
-        $scope.loggedIn = false;        
+        $sharedProps.loggedIn[0] = false;        
       }
-      return username;
     })
     .catch(function () {
-      $scope.loggedIn = false;
+      $sharedProps.loggedIn[0] = false;
     });
   };
   setUsername();
-
 });
-
-// not sure if this is the best way to do this. Probably a better way...
-module.exports.isLoggedIn = function () { return isLoggedIn(); };
-module.exports.setUsername = function () { return setUsername(); };
-module.exports.getUsername = function () { return getUsername(); };

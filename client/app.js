@@ -1,32 +1,24 @@
-  const angular = require('angular');
+
+const angular = require('angular');
 require('angular-route');
 const app = angular.module('app', ['ngRoute']);
 
 app.config(function($routeProvider, $locationProvider) {
   $routeProvider
   .when('/', {
-    templateUrl : 'pages/home.html'//,
-    // controller  : 'homeController'
+    templateUrl : 'pages/home.html'
   })
   .when('/about', {
-    templateUrl : 'pages/about.html'//,
-    //controller  : 'aboutController'
+    templateUrl : 'pages/about.html'
   })
   .when('/login', {
-    templateUrl : 'pages/login.html'//,
-    // controller  : 'loginController'
+    templateUrl : 'pages/login.html'
   })
   .when('/signup', {
-    templateUrl : 'pages/signup.html'//,
-    // controller  : 'signupController'
+    templateUrl : 'pages/signup.html'
   })
-  // .when('/drop', {
-  //   templateUrl : 'pages/drop.html'//,
-  //   // controller  : 'dropController'
-  // })
   .when('/files', {
     templateUrl : 'pages/files.html'//,
-    // controller  : 'filesController'
   })
   .when('/logout', {
     templateUrl : 'pages/home.html',
@@ -38,21 +30,11 @@ app.config(function($routeProvider, $locationProvider) {
 
 
 app.service('$sharedProps', function () {
-  var loggedIn = false;
-  var username = null;
+  var loggedIn = [false];
+  var username = [null];
   return {
-    getLoggedIn: function () {
-        return loggedIn;
-    },
-    setLoggedIn: function(value) {
-        loggedIn = value;
-    },
-    getUsername: function () {
-        return username;
-    },
-    setUsername: function(value) {
-        username = value;
-    }
+    loggedIn: loggedIn,
+    username: username
   };
 });
 

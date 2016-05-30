@@ -60,7 +60,6 @@ pg_ctl stop --pgdata=database/test
   3. Limit Public saves to 25mb
   
   Front End:
-  3. Create a service to pass loggedIn and username to the dropzone and the saved files
   4. ngShow "Public" Drop Zone when not LoggedIn
   5. Show Saved files based on user ip?
   6. ngHide Edit Option on saved files when not loggedIn
