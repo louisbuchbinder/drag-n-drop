@@ -15,6 +15,9 @@ else { console.log('Error: No environment detected'); process.exit(1); }
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
 
 const db = require('./database');
-db.initialize(true, ()=> { console.log('done'); process.exit(); });
+db.initialize(true, () => { 
+  return db.insertInto('users', {username: 'public', password: '', created: Date.now()})
+  .then(() => { console.log('done'); process.exit(); });
+});
 
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  ///// ///// 
