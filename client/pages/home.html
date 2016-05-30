@@ -7,9 +7,10 @@
     <h4>Drag files into the drop zone to upload:</h4>
     <div id="dropbox" class="jumbotron">
       <h1>DROP ZONE</h1>
-      <h1>logged in as {{username[0]}}</h1>
+      <p ng-show="loggedIn[0]">logged in as {{username[0]}}</p>
+      <p ng-hide="loggedIn[0]">Public. Please <a href="/signup">signup</a>/<a href="/login">login</a> to enter private mode.</p>
     </div>
-    <div class="alert alert-success" ng-model="noError" ng-show="error">
+    <div class="alert alert-success" ng-show="">
       <strong>File Saved!</strong>
       <p>Your File was Saved at "INSERT LINK HERE"</p>
     </div>

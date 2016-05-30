@@ -3,6 +3,11 @@
   color: white;
   text-align: center;
 }
+.jumbotron p {
+  color: white;
+  text-align: center;
+}
+
 
 .jumbotron {
   background-color: black; 
