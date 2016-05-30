@@ -8,7 +8,8 @@ var updateFiles = function () {};
 // var app = angular.module('app', []);
 
 
-app.controller('filesController', function ($scope, $http) {
+app.controller('filesController', function ($scope, $http, $sharedProps) {
+  $scope.loggedIn = $sharedProps.loggedIn;
 
   updateFiles = function (filename) {
     // use filename='all' to update all files

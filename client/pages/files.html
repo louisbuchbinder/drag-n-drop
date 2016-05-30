@@ -15,7 +15,7 @@
         <td><a href="{{data.link}}" target="_blank">{{data.link}}</a></td>
         <td>Anyone with Link</td>
         <td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#shareModal" ng-click="setCurrent(data);">Share</button></td>
-        <td><button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal" ng-click="setCurrent(data);">Edit</button></td>
+        <td ng-show="loggedIn[0]"><button class="btn btn-xs btn-info" data-toggle="modal" data-target="#editModal" ng-click="setCurrent(data);">Edit</button></td>
       </tr>
     </table>
 

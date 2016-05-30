@@ -60,8 +60,8 @@ pg_ctl stop --pgdata=database/test
   3. Limit Public saves to 25mb
   
   Front End:
-  5. Show Saved files based on user ip?
-  6. ngHide Edit Option on saved files when not loggedIn
+  1. 
+  2. Show Saved files based on user ip?
 
 
 
