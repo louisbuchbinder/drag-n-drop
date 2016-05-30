@@ -4,3 +4,4 @@ POSTGRES_DB_USER=postgres
 POSTGRES_DB_PASSWORD=password
 POSTGRES_DB_LOCATION=localhost/drag-n-drop
 JWT_SECRET=temporarySecret
+PORT=3000

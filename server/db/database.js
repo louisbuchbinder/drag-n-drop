@@ -40,6 +40,7 @@ var create = [
 
 
 const escape$ = (string) => {
+  string = typeof string === 'string' ? string : String(string);
   return string.split('')
   .filter((character, index) => { 
     if (character!=='$') { return true; }

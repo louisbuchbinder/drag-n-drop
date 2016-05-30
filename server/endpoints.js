@@ -11,12 +11,11 @@ const generateUrl = shortenedUrls.generateUrl;
 // const cookieParser = require('cookie-parser');
 
 // hard coded for now. Remove when authentication is added
-var username = 'louie';
-var userindex = '1';
+// var username = 'louie';
+// var userindex = '1';
+
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
 const authentication = require('./authentication/authentication.js');
-
-
 
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
 const stream = require('stream');
@@ -75,8 +74,8 @@ module.exports = (app) => {
     app.get(link, (request, response) => pipeFile(response, filename) );
   };
   
-  authentication.protect(app, '/save');
-  app.post('/save', (request, response) => {
+  // authentication.protect(app, '/save');
+  app.post('/save', cookieParser(), (request, response) => {
 
     var filedata = '';
     var filename = request.headers.filename || 'no_name_file';
@@ -91,12 +90,11 @@ module.exports = (app) => {
     });
     request.on('end', function () {
       authentication.verifyUsername(request, response)
-      .then((username) => {
-        return db.fetch('users', 'index', {username: username})
-        .then((results) => {
-          if (results.rows.length !== 1) { return Promise.reject('invalid user token'); }
-          return String(results.rows[0].index);
-        });
+      .then((username) => db.fetch('users', 'index', {username: username}) )
+      .catch(() => db.fetch('users', 'index', {username: 'public'}) )
+      .then((results) => {
+        if (results.rows.length !== 1) { return Promise.reject('invalid user token'); }
+        return String(results.rows[0].index);
       })
       .then((userindex) => {
         return db.insertInto('files', {userindex: userindex, link: url, filename: filename, filedata: filedata});
@@ -110,18 +108,19 @@ module.exports = (app) => {
     });
   });
 
-  
 
-
-
-  authentication.protect(app, '/fetchFiles');
-  app.get('/fetchFiles', (request, response) => {
+  // authentication.protect(app, '/fetchFiles');
+  app.get('/fetchFiles', cookieParser(), (request, response) => {
     let filename = request.query.filename;
     let where = filename !== 'all' ? {'files.filename': filename} : {};
     where['users.index'] = ['files.userIndex'];
     authentication.verifyUsername(request, response)
     .then((username) => {
       where['users.username'] = username;
+      return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
+    })
+    .catch(() => {
+      where['users.username'] = 'public';
       return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
     })
     .then((results) => response.send(results.rows))

@@ -52,6 +52,18 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
+0. Add public drop zone to home page
+  Back End:
+  1. Limit Public saves to 25mb
+  2. Possibly fetch by ip address (look into this)
+  
+  Front End:
+  2. Add message on error saved file
+  3. Limit Public saves to 25mb
+
+
+
+0. Set custom drag image when over the dropbox
 1. Testing
 2. Delete File in edit modal
 3. Change Permissions in edit modal
