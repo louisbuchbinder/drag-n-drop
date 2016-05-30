@@ -54,8 +54,7 @@ pg_ctl stop --pgdata=database/test
 
 0. Add public drop zone to home page
   Back End:
-  1. Remove protection from saveFiles route
-  2. Still use verify username, On invalid username revert to public
+
     1. Possibly Save by ip address (look into this)
   3. Limit Public saves to 25mb
   
