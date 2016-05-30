@@ -109,14 +109,18 @@ module.exports = (app) => {
   });
 
 
-  authentication.protect(app, '/fetchFiles');
-  app.get('/fetchFiles', (request, response) => {
+  // authentication.protect(app, '/fetchFiles');
+  app.get('/fetchFiles', cookieParser(), (request, response) => {
     let filename = request.query.filename;
     let where = filename !== 'all' ? {'files.filename': filename} : {};
     where['users.index'] = ['files.userIndex'];
     authentication.verifyUsername(request, response)
     .then((username) => {
       where['users.username'] = username;
+      return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
+    })
+    .catch(() => {
+      where['users.username'] = 'public';
       return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
     })
     .then((results) => response.send(results.rows))
