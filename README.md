@@ -55,20 +55,10 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
-0. Add public drop zone to home page
-  Back End:
-  1. Possibly fetch by ip address (look into this)
-  
-  Front End:
-  1. Fetch public files based on ip
-
-
-
 0. Set custom drag image when over the dropbox
 1. Testing
 2. Delete File in edit modal
 3. Change Permissions in edit modal
-4. toggle collapse only if aria expanded...
 5. Allow for dropped directories
 
 

@@ -105,7 +105,9 @@ module.exports = (app) => {
       })
       .then((userindex) => {
         // let readStream = fs.createReadStream('./uploads' + url);
-        return db.insertInto('files', {userindex: userindex, link: url, filename: filename, filedata: filedata});
+        let ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+        ip = ip ? ip : 'undefined';
+        return db.insertInto('files', {userindex: userindex, link: url, filename: filename, ip:ip, filedata: filedata});
       })
       .then(()=>{
         setFileEndpoint(filename, url);
@@ -128,6 +130,9 @@ module.exports = (app) => {
       return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
     })
     .catch(() => {
+      let ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+      ip = ip ? ip : 'undefined';
+      where.ip = ip;
       where['users.username'] = 'public';
       return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
     })
