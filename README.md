@@ -1,7 +1,7 @@
 #Drop Zone#
 ###Drag-n-Drop File Transfer Server###
 
-***Visit the (Drop Zone)[https://drop-zone.herokuapp.com]***
+***Visit the [Drop Zone](https://drop-zone.herokuapp.com)***
 
 ###Save Your Most Important Files###
 
