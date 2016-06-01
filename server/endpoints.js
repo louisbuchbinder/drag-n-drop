@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require('fs');
+// const fs = require('fs');
 const cookieParser = require('cookie-parser');
 
 const db = require('./db/database.js');
@@ -87,7 +87,7 @@ module.exports = (app) => {
         if (buffer) { 
           dataSize += buffer.length;
           if (dataSize > 19000000) { 
-            console.log(dataSize);
+            // console.log(dataSize);
             // request.pause();
             tooLarge = true;
             request.emit('end');
