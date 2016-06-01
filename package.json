@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Drag files into client browser. Create a copy on the server.",
   "main": "index.js",
+  "repository": "https://github.com/louisbuchbinder/drop-zone.git",
   "scripts": {
     "start": "npm run build && node index.js -production",
     "start-dev": "npm run build-dev && nodemon index.js -development",
@@ -35,6 +36,7 @@
     "pg": "^4.5.5"
   },
   "devDependencies": {
+    "axios": "^0.12.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "jshint": "^2.9.2",
