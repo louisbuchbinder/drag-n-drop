@@ -55,10 +55,14 @@ pg_ctl stop --pgdata=database/test
 
 ***Next Steps***
 
+
 0. Set custom drag image when over the dropbox
-1. Testing
-2. Delete File in edit modal
-3. Change Permissions in edit modal
+1. Delete File in edit modal
+2. Change Permissions in edit modal
+3. Testing
+4. Revisit large file limits
+  1. Show error immediatley on client side. Do not send to server
+  2. Store large files in multiple postgresql entries.
 5. Allow for dropped directories
 
 
