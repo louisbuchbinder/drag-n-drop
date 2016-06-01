@@ -17,7 +17,7 @@ app.controller('dropController', function ($scope, $sharedProps) {
   const allowDrop = function (event) { event.preventDefault(); };
 
   const sendFile = function (file) {
-    console.log('send file');
+    // console.log('send file');
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/save', true);
     xhr.setRequestHeader('filename', file.name);
@@ -37,7 +37,7 @@ app.controller('dropController', function ($scope, $sharedProps) {
         // updateFiles(file.name);
         $sharedProps.updateFiles[0](file.name, function () {
 
-          console.log('saved');
+          // console.log('saved');
           $scope.lastFile = $sharedProps.lastFile[0];
           $scope.saved = true;
           $scope.processing = false;
@@ -52,7 +52,7 @@ app.controller('dropController', function ($scope, $sharedProps) {
   const blockDrop = function (event) { event.preventDefault(); }; 
 
   const drop = function (event) {
-    console.log('drop file');
+    // console.log('drop file');
     $scope.$apply(function () { 
       $scope.saved = false;
       $scope.error = false;
