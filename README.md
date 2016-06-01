@@ -57,11 +57,10 @@ pg_ctl stop --pgdata=database/test
 
 0. Add public drop zone to home page
   Back End:
-  2. Possibly fetch by ip address (look into this)
+  1. Possibly fetch by ip address (look into this)
   
   Front End:
-  2. Add message on error saved file
-  3. Limit Public saves to 25mb
+  1. Fetch public files based on ip
 
 
 

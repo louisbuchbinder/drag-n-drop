@@ -70,16 +70,14 @@ module.exports = (app) => {
   
   // authentication.protect(app, '/save');
   app.post('/save', cookieParser(), (request, response) => {
-    
 
     let filedata = '';
     let filename = request.headers.filename || 'no_name_file';
 
     let url = generateUrl();
+
     let dataSize = 0;
     let tooLarge = false;
-
-    // let writeStream = fs.createWriteStream('./uploads' + url);
 
     request.on('readable', function(){
       if (!tooLarge) {
@@ -87,18 +85,14 @@ module.exports = (app) => {
         if (buffer) { 
           dataSize += buffer.length;
           if (dataSize > 19000000) { 
-            // console.log(dataSize);
-            // request.pause();
             tooLarge = true;
             request.emit('end');
-            // response.removeAllListeners('data');
-            // response.status(400).send('File size is too large. 19mb limit!'); 
           }
-          // writeStream.write(buffer.toString('hex'));
           filedata += buffer.toString('hex');
         }
       }
     });
+    
     request.on('end', function () {
       if (tooLarge) return response.status(400).send('File size is too large. 19mb limit!'); 
 

@@ -7,6 +7,9 @@
     <div class="alert alert-info" ng-show="processing">
       <strong>Processing Your File!</strong>
     </div>
+    <div class="alert alert-danger" ng-show="error">
+      <strong>{{errorMessage}}</strong>
+    </div>
     <div class="alert alert-success" ng-show="saved">
       <strong>{{lastFile.filename}} was Saved!</strong>
       <p>To download your file visit <a href="https://drop-zone.herokuapp.com{{lastFile.link}}">drop-zone.herokuapp.com{{lastFile.link}}</a></p>
