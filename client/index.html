@@ -16,21 +16,21 @@
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-click="isCollapsed = !isCollapsed">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" data-toggle="collapse" data-target="#navbar">Drop Zone</a>
+            <a class="navbar-brand" href="/" data-target="#navbar" ng-attr-data-toggle="{{!isCollapsed ? 'collapse' : ''}}" ng-click="collapseNav();">Drop Zone</a>
           </div>
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="/signup" ng-hide="loggedIn[0]" data-toggle="collapse" data-target="#navbar">Sign Up</a></li>
-              <li><a href="/login" ng-hide="loggedIn[0]" data-toggle="collapse" data-target="#navbar">Log In</a></li>
-              <li><a href="/files" data-toggle="collapse" data-target="#navbar">Saved Files</a></li>
-              <li><a href="/about" data-toggle="collapse" data-target="#navbar">About</a></li>
-              <li><a href="/logout" ng-show="loggedIn[0]" data-toggle="collapse" data-target="#navbar">Log Out</a></li>
+              <li><a href="/signup" ng-hide="loggedIn[0]" data-target="#navbar" ng-attr-data-toggle="{{!isCollapsed ? 'collapse' : ''}}" ng-click="collapseNav();">Sign Up</a></li>
+              <li><a href="/login" ng-hide="loggedIn[0]" data-target="#navbar" ng-attr-data-toggle="{{!isCollapsed ? 'collapse' : ''}}" ng-click="collapseNav();">Log In</a></li>
+              <li><a href="/files" data-target="#navbar" ng-attr-data-toggle="{{!isCollapsed ? 'collapse' : ''}}" ng-click="collapseNav();">Saved Files</a></li>
+              <li><a href="/about" data-target="#navbar" ng-attr-data-toggle="{{!isCollapsed ? 'collapse' : ''}}" ng-click="collapseNav();">About</a></li>
+              <li><a href="/logout" ng-show="loggedIn[0]" data-target="#navbar" ng-attr-data-toggle="{{!isCollapsed ? 'collapse' : ''}}" ng-click="collapseNav();">Log Out</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

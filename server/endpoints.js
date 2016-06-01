@@ -8,12 +8,6 @@ const shortenedUrls = require('./shortenedUrls');
 const setExistingUrls = shortenedUrls.setExistingUrls;
 const generateUrl = shortenedUrls.generateUrl;
 
-// const cookieParser = require('cookie-parser');
-
-// hard coded for now. Remove when authentication is added
-// var username = 'louie';
-// var userindex = '1';
-
 ///// /////  ///// /////  ///// /////  ///// /////  ///// /////  
 const authentication = require('./authentication/authentication.js');
 
@@ -77,18 +71,31 @@ module.exports = (app) => {
   // authentication.protect(app, '/save');
   app.post('/save', cookieParser(), (request, response) => {
 
-    var filedata = '';
-    var filename = request.headers.filename || 'no_name_file';
+    let filedata = '';
+    let filename = request.headers.filename || 'no_name_file';
 
     let url = generateUrl();
 
+    let dataSize = 0;
+    let tooLarge = false;
+
     request.on('readable', function(){
-      var buffer = request.read();
-      if (buffer) { 
-        filedata += buffer.toString('hex');
+      if (!tooLarge) {
+        let buffer = request.read();
+        if (buffer) { 
+          dataSize += buffer.length;
+          if (dataSize > 19000000) { 
+            tooLarge = true;
+            request.emit('end');
+          }
+          filedata += buffer.toString('hex');
+        }
       }
     });
+    
     request.on('end', function () {
+      if (tooLarge) return response.status(400).send('File size is too large. 19mb limit!'); 
+
       authentication.verifyUsername(request, response)
       .then((username) => db.fetch('users', 'index', {username: username}) )
       .catch(() => db.fetch('users', 'index', {username: 'public'}) )
@@ -97,7 +104,10 @@ module.exports = (app) => {
         return String(results.rows[0].index);
       })
       .then((userindex) => {
-        return db.insertInto('files', {userindex: userindex, link: url, filename: filename, filedata: filedata});
+        // let readStream = fs.createReadStream('./uploads' + url);
+        let ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+        ip = ip ? ip : 'undefined';
+        return db.insertInto('files', {userindex: userindex, link: url, filename: filename, ip:ip, filedata: filedata});
       })
       .then(()=>{
         setFileEndpoint(filename, url);
@@ -120,6 +130,9 @@ module.exports = (app) => {
       return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
     })
     .catch(() => {
+      let ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+      ip = ip ? ip : 'undefined';
+      where.ip = ip;
       where['users.username'] = 'public';
       return db.join('users', 'files', where, 'JOIN', 'files.filename, files.link');
     })

@@ -35,7 +35,7 @@ var clean = [
 
 var create = [
   'CREATE TABLE IF NOT EXISTS users (index SERIAL PRIMARY KEY, username TEXT UNIQUE, password TEXT, created TEXT)',
-  'CREATE TABLE IF NOT EXISTS files (index SERIAL PRIMARY KEY, userindex INT, FOREIGN KEY (userindex) REFERENCES users(index), link TEXT UNIQUE, filename TEXT, filedata TEXT)'
+  'CREATE TABLE IF NOT EXISTS files (index SERIAL PRIMARY KEY, userindex INT, FOREIGN KEY (userindex) REFERENCES users(index), link TEXT UNIQUE, filename TEXT, ip TEXT,filedata TEXT)'
 ];
 
 
