@@ -6,6 +6,19 @@ app.controller('navigationController', function ($scope, $http, $sharedProps) {
   $scope.loggedIn = $sharedProps.loggedIn;
   $scope.username = $sharedProps.username;
 
+  $scope.isCollapsed =  true;
+
+
+  const collapseNav = function () {
+    setTimeout(function () {
+      $scope.$apply(function () {
+        $scope.isCollapsed = true;
+      });
+    }, 0);
+  };
+
+  $scope.collapseNav = collapseNav;
+
   var setUsername = function () {
     return $http({
       url:'/username',
